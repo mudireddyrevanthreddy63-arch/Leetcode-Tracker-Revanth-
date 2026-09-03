@@ -1,0 +1,22 @@
+// Last updated: 03/09/2026, 09:33:05
+1class Solution {
+2    public int characterReplacement(String s, int k) {
+3        int[] count = new int[26];
+4        int left = 0, maxCount = 0, result = 0;
+5        
+6        for (int right = 0; right < s.length(); right++) {
+7            count[s.charAt(right) - 'A']++;
+8            maxCount = Math.max(maxCount, count[s.charAt(right) - 'A']);
+9            
+10            while ((right - left + 1) - maxCount > k) {
+11                count[s.charAt(left) - 'A']--;
+12                left++;
+13            }
+14            
+15            result = Math.max(result, right - left + 1);
+16        }
+17        
+18        return result;
+19    }
+20}
+21
